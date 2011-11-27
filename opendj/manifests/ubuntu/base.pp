@@ -13,5 +13,6 @@ class opendj::ubuntu::base {
 		require => Common::Source["opendj.zip"]
 		}
 	class { 'opendj::ubuntu::service':}	
+	class { 'opendj::ubuntu::config':}
 	
 }
