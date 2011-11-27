@@ -1,0 +1,13 @@
+class opendj::ubuntu::service(
+	)
+{
+
+
+
+
+
+
+
+
+
+}
