@@ -13,5 +13,4 @@ class opendj::install(
 		creates => "${opendj::params::installpath}/OpenDJ-2.4.4/puppetinstalledopendj.txt",
 		}
 
-
 }
