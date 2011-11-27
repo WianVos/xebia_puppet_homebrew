@@ -13,6 +13,8 @@ class opendj::ubuntu::service(
 	service {"opendj":
 		ensure => running,
 		require => Exec['opendj service setup'],
+		hasstatus => false,
+		pattern => 'OpenDJ-2.4.4'
 		}
 
 
