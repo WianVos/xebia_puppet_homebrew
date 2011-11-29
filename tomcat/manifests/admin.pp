@@ -1,6 +1,6 @@
-# Class: opendj
+# Class: tomcat::admin
 #
-# This module manages opendj
+# This module manages tomcat
 #
 # Parameters:
 #
@@ -11,7 +11,7 @@
 # Sample Usage:
 #
 # [Remember: No empty lines between comments and class definition]
-class opendj {
+class tomcat::admin {
 
 
 }

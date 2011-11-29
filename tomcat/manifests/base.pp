@@ -13,9 +13,5 @@
 # [Remember: No empty lines between comments and class definition]
 class skeleton::base {
 
-	case $operatingsystem {
-                Ubuntu  : { include skeleton::ubuntu}
-                default : { notice "unsupported operatingsystem ${operatingsystem}" }
-                }
 
 }

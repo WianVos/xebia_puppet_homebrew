@@ -1,6 +1,6 @@
-# Class: opendj
+# Class: tomcat
 #
-# This module manages opendj
+# This module manages tomcat
 #
 # Parameters:
 #
@@ -11,12 +11,12 @@
 # Sample Usage:
 #
 # [Remember: No empty lines between comments and class definition]
-class opendj {
+class tomcat {
 
-	include opendj::params
-	include opendj::base	
+	include tomcat::params
 	
-	
-
-
+	case $operatingsystem {
+                Ubuntu  : { include tomcat::ubuntu}
+                default : { notice "unsupported operatingsystem ${operatingsystem}" }
+                }
 }

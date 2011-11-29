@@ -11,6 +11,11 @@ define common::source(
 						target => $target,
 					}
 			}
+		targz : { common::archive::targz{"$name":
+						source_url => $source_url,
+						target => $target,
+					}
+			}
 		default : { notice "$type is an unsupported archive" }	
 		}
 }
