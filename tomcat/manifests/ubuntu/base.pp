@@ -1,0 +1,4 @@
+class skeleton::ubuntu::base {
+	
+	
+}
