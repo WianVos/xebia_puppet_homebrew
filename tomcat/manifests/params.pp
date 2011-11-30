@@ -20,12 +20,14 @@ class tomcat::params{
 	$tomcat_major_version = "6"	
 	$tomcat_archive_filename = "apache-tomcat-${tomcat_version}.tar.gz"
 	$tomcat_src_url = "${tomcat_mirror}/tomcat-${tomcat_major_version}/v${tomcat::params::tomcat_version}/bin/${tomcat::params::tomcat_archive_filename}"
+	$tomcat_extra_url = "${tomcat_mirror}/tomcat-${tomcat_major_version}/v${tomcat::params::tomcat_version}/bin/extras"
 
 	$tomcat_user = "tomcat"
 	$tomcat_user_uid = "401"
 	$tomcat_user_group = "tomcat"
 
 	$tomcat_home = "/opt/apache-tomcat-${tomcat::params::tomcat_version}"
+	$tomcat_instance_base = "/srv/tomcat"
 
 /*	
 	$instance_basedir = $tomcat_instance_basedir ? {

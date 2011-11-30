@@ -16,6 +16,12 @@ define common::source(
 						target => $target,
 					}
 			}
+		
+		regfile : { common::archive::regfile{"$name":
+						source_url => $source_url,
+						target => $target,
+					}
+			}
 		default : { notice "$type is an unsupported archive" }	
 		}
 }
