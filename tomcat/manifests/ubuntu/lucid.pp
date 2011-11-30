@@ -1,4 +1,4 @@
-class skeleton::ubuntu::lucid inherits skeleton::ubuntu::base {
+class tomcat::ubuntu::lucid inherits tomcat::ubuntu::base {
 
 
 }

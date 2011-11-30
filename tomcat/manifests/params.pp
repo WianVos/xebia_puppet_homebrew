@@ -13,9 +13,21 @@
 # [Remember: No empty lines between comments and class definition]
 class tomcat::params{
 
-	 $default_source_release = "6.0.26"
-	 $default_source_release_v55 = "5.5.27"
-	
+	$default_tomcat_version = "6.0.33"
+        $tomcat_instance_basedir = "/srv/tomcat"
+	$tomcat_mirror = "http://archive.apache.org/dist/tomcat/"
+	$tomcat_version = "6.0.33"
+	$tomcat_major_version = "6"	
+	$tomcat_archive_filename = "apache-tomcat-${tomcat_version}.tar.gz"
+	$tomcat_src_url = "${tomcat_mirror}/tomcat-${tomcat_major_version}/v${tomcat::params::tomcat_version}/bin/${tomcat::params::tomcat_archive_filename}"
+
+	$tomcat_user = "tomcat"
+	$tomcat_user_uid = "401"
+	$tomcat_user_group = "tomcat"
+
+	$tomcat_home = "/opt/apache-tomcat-${tomcat::params::tomcat_version}"
+
+/*	
 	$instance_basedir = $tomcat_instance_basedir ? {
     		""      => "/srv/tomcat",
     		default => $tomcat_instance_basedir,
@@ -26,21 +38,14 @@ class tomcat::params{
   			} else {
     		$mirror = "http://archive.apache.org/dist/tomcat/"
   		}
+	if $tomcat_version = "" {
+		$tomcat_version	= $default_tomcat_version
+		}
 	
-     	if ( ! $tomcat_version ) {
-      		$maj_version = "6"
-      		$version = $default_source_release
-    		} else {
-      		$version = $tomcat_version
-      		if versioncmp($tomcat_version, '6.0.0') >= 0 {
-        	$maj_version = "6"
-      			} else {
-        		if versioncmp($tomcat_version, '5.5.0') >= 0 {
-          $maj_version = "5.5"
-        } else {
-          fail "only versions >= 5.5 or >= 6.0 are supported !"
-        }
-      }
-    }
+	if versioncmp($tomcat_version, '6.0.0' } >= 0 {
+		$tomcat_major_version = "6"
+		}
+*/
+		
 }
 

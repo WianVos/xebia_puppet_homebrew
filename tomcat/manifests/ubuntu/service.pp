@@ -1,7 +1,6 @@
-class skeleton::ubuntu::service(
+class tomcat::ubuntu::service(
 	)
 {
-	include skeleton::params
 
 
 

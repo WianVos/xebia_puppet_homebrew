@@ -1,7 +1,7 @@
-class opendj::ubuntu {
+class tomcat::ubuntu {
 
 	case $lsbdistcodename {
-		lucid : { include opendj::ubuntu::lucid }
+		lucid : { include tomcat::ubuntu::lucid }
 		default : { notice "unsupported ubuntu release"}
 	}
 }
