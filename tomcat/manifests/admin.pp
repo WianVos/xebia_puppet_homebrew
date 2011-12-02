@@ -17,13 +17,13 @@ class tomcat::admin {
 
   user{"tomcat":
     ensure => present,
-    uid    => $tomcat_user_uid? {
+    uid    => $tomcat::params::tomcat_user_uid? {
       ''      => undef,
-      default => $tomcat_user_uid,
+      default => $tomcat::params::tomcat_user_uid,
     },
-    groups => $tomcat_user_groups? {
+    groups => $tomcat::params::tomcat_user_group? {
       ''      => undef,
-      default => $tomcat_user_groups,
+      default => $tomcat::params::tomcat_user_group,
     }
   }
 
