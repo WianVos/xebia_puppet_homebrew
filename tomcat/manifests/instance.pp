@@ -18,6 +18,7 @@ define tomcat::instance($ensure="present",
                         $setenv=[],
                         $connector=[],
                         $executor=[],
+                        $authentication=[],
                         $manage=false) {
 
   include tomcat::params
