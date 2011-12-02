@@ -72,7 +72,7 @@ define tomcat::connector($ensure="present",
     $filemode = 0664
   }
 
-  file {"${tomcat::params::instance_basedir}/${instance}/conf/connector-${name}.xml":
+  file {"${tomcat::params::tomcat_instance_base}/${instance}/conf/connector-${name}.xml":
     ensure  => $ensure,
     owner   => $owner,
     group   => $group,
@@ -80,10 +80,10 @@ define tomcat::connector($ensure="present",
     content => template("tomcat/connector.xml.erb"),
     replace => $manage,
     require => $executor ? {
-      false   => File["${tomcat::params::instance_basedir}/${instance}/conf"],
+      false   => File["${tomcat::params::tomcat_instance_base}/${instance}/conf"],
       default => [
         Tomcat::Executor[$executor],
-        File["${tomcat::params::instance_basedir}/${instance}/conf"],
+        File["${tomcat::params::tomcat_instance_base}/${instance}/conf"],
       ],
     },
   }
