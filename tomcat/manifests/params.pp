@@ -14,7 +14,7 @@
 class tomcat::params{
 
 	$default_tomcat_version = "6.0.33"
-        $tomcat_instance_basedir = "/srv/tomcat"
+    
 	$tomcat_mirror = "http://archive.apache.org/dist/tomcat/"
 	$tomcat_version = "6.0.33"
 	$tomcat_major_version = "6"	

@@ -108,7 +108,10 @@ define tomcat::instance($ensure="present",
   include tomcat::params
   
   $tomcat_name = $name
-  $basedir = "${tomcat::params::instance_basedir}/${name}"
+  $basedir = "${tomcat::params::tomcat_instance_base}/${name}"
+  $serverdotxml = "server.xml.tomcat6.erb"
+  $catalinahome = "/opt/apache-tomcat"
+  $javahome = $java_home
 
   if $owner == "tomcat" {
     $dirmode  = $webapp_mode ? {
@@ -169,65 +172,16 @@ define tomcat::instance($ensure="present",
     $connectors = $connector
   }
 
-  if defined(File["${tomcat::params::instance_basedir}"]) {
-    debug "File[${tomcat::params::instance_basedir}] already defined"
+  if defined(File["${tomcat::params::tomcat_instance_base}"]) {
+    debug "File[${tomcat::params::tomcat_instance_base}] already defined"
   } else {
-    file {"${tomcat::params::instance_basedir}":
+    file {"${tomcat::params::tomcat_instance_base}":
       ensure => directory,
     }
   }
 
-  if $tomcat::params::type == "package" and $lsbdistcodename == "Santiago" {
-    # force catalina.sh to use the common library in CATALINA_HOME and not CATALINA_BASE
-    $classpath = "/usr/share/tomcat6/bin/tomcat-juli.jar" 
-  }
-
-  # default server.xml is slightly different between tomcat5.5 and tomcat6
-  if $tomcat::params::maj_version == "5.5" {
-    $serverdotxml = "server.xml.tomcat55.erb"
-  }
-
-  if $tomcat::params::maj_version == "6" {
-    $serverdotxml = "server.xml.tomcat6.erb"
-  }
-
-  if $tomcat::params::maj_version == "5.5" and $tomcat::params::type == "package" {
-    $catalinahome = $operatingsystem ? {
-      RedHat => "/usr/share/tomcat5",
-      Debian => "/usr/share/tomcat5.5",
-      Ubuntu => "/usr/share/tomcat5.5",
-    }
-  }
-
-  if $tomcat::params::maj_version == "6" and $tomcat::params::type == "package" {
-    $catalinahome = $operatingsystem ? {
-      RedHat => "/usr/share/tomcat6",
-      Debian => "/usr/share/tomcat6",
-      Ubuntu => "/usr/share/tomcat6",
-    }
-  }
-
-  # In this case, we are using a non package-based tomcat.
-  if $tomcat::params::type == "source" {
-    $catalinahome = "/opt/apache-tomcat"
-  }
-
-  # Define default JAVA_HOME used in tomcat.init.erb
-  if $java_home == "" {
-    case $operatingsystem {
-      RedHat: {
-        $javahome = "/usr/lib/jvm/java"
-      }
-      Debian,Ubuntu: {
-        $javahome = "/usr"
-      }
-      default: {
-        err("java_home not defined for '${operatingsystem}'.")
-      }
-    }
-  } else {
-    $javahome = $java_home
-  }
+    
+  
 
   # Instance directories
   case $ensure {
@@ -411,11 +365,9 @@ define tomcat::instance($ensure="present",
     require => File["${basedir}/bin/setenv.sh"],
   }
 
-  if $tomcat::params::type == "package" {
-    $servicerequire = Package["tomcat"]
-  } else {
+  
     $servicerequire = File["/opt/apache-tomcat"]
-  }
+  
 
   service {"tomcat-${name}":
     ensure  => $ensure ? {
@@ -433,7 +385,7 @@ define tomcat::instance($ensure="present",
       absent    => false,
     },
     require => [File["/etc/init.d/tomcat-${name}"], $servicerequire],
-    pattern => "-Dcatalina.base=${tomcat::params::instance_basedir}/${name}",
+    pattern => "-Dcatalina.base=${tomcat::params::tomcat_instance_base}/${name}",
   }
 
   # Logrotate
