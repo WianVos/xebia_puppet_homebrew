@@ -89,7 +89,7 @@ Example usage:
 */
 define tomcat::instance($ensure="present",
                         $owner="tomcat",
-                        $group="adm",
+                        $group="tomcat",
                         $server_port="8005",
                         $http_port="8080",
                         $http_address=false,
