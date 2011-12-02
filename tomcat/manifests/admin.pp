@@ -26,6 +26,12 @@ class tomcat::admin {
       default => $tomcat::params::tomcat_user_group,
     }
   }
-
+  group{"tomcat":
+    ensure => present,
+    gid    => $tomcat::params::tomcat_user_uid? {
+      ''      => undef,
+      default => $tomcat::params::tomcat_user_uid,
+    }
+ }
 
 }
