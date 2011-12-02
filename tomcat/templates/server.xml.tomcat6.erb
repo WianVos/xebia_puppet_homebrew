@@ -9,6 +9,9 @@
 <% connectors.each do |conn| -%>
   <!ENTITY connector-<%= conn %> SYSTEM "connector-<%= conn %>.xml">
 <% end -%>
+<% if not authentication.empty? -%>
+  <!ENTITY authentication-default SYSTEM "ldap_authentication.xml">
+ <% end -%>
 ]>
 <% end -%>
 <% if manage -%>
