@@ -13,7 +13,7 @@ class tomcat::ubuntu::extra{
 			type => "regfile",
 			}
 
-	file { "${tomcat::params::tomcat_home}/bin/tomcat-juli.jar":
+	file { "${tomcat::params::tomcat_home}/lib/tomcat-juli.jar":
     			ensure  => link,
     			target  => "${tomcat::params::tomcat_home}/extras/tomcat-juli.jar",
     			require => Common::Source["tomcat-juli.jar"],
@@ -24,7 +24,7 @@ class tomcat::ubuntu::extra{
 			target => "${tomcat::params::tomcat_home}/extras",
 			type => "regfile",
 			}
-	file { "${tomcat::params::tomcat_home}/bin/tomcat-juli-adapters.jar":
+	file { "${tomcat::params::tomcat_home}/lib/tomcat-juli-adapters.jar":
     			ensure  => link,
     			target  => "${tomcat::params::tomcat_home}/extras/tomcat-juli-adapters.jar",
     			require => Common::Source["tomcat-juli-adapters.jar"],

@@ -28,6 +28,7 @@ class tomcat::params{
 
 	$tomcat_home = "/opt/apache-tomcat-${tomcat::params::tomcat_version}"
 	$tomcat_instance_base = "/srv/tomcat"
+	$java_home="/usr/lib/jvm/java-6-openjdk/jre"
 
 /*	
 	$instance_basedir = $tomcat_instance_basedir ? {

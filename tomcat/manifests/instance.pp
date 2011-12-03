@@ -27,7 +27,7 @@ define tomcat::instance($ensure="present",
   $basedir = "${tomcat::params::tomcat_instance_base}/${name}"
   $serverdotxml = "server.xml.tomcat6.erb"
   $catalinahome = "/opt/apache-tomcat"
-  $javahome = $java_home
+  $javahome = "${tomcat::params::java_home}"
 
   if $owner == "tomcat" {
     $dirmode  = $webapp_mode ? {
